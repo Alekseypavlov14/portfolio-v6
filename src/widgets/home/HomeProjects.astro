@@ -1,0 +1,172 @@
+---
+import Container from '@/components/Container.astro'
+
+---
+<section id="works" class="projects">
+  <Container class="projects__container">
+    <div class="projects__slider">
+      {new Array(10).fill(0).map(() => (
+        <div data-project class="project">
+          <div class="project__content">
+            <div class="project__image">
+            </div>
+      
+            <div class="project__text">
+              <h3 class="project__title">Data Xata - Cloud computing</h3>
+      
+              <div class="project__info">
+                <span class="project__date">20 April 2026 </span>
+                <span class="project__separation">|</span>
+                <span class="project__technologies">React, TypeScript, Next JS</span>
+              </div>
+      
+              <p class="project__description">
+                A modern, responsive portfolio website showcasing creative and technical 
+                work with a clean, minimal design. It highlights projects, skills, 
+                and experience through interactive sections and smooth navigation. 
+                Built for performance and accessibility, it provides a seamless user 
+                experience across devices while reflecting a strong personal brand and 
+                professional identity.
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="projects__nav">
+      <div class="projects__nav-links">
+        {new Array(10).fill(0).map(() => (
+          <a data-project-link class="projects__nav-link"></a>
+        ))}
+      </div>
+      <div class="projects__nav-terminator"></div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { findMaxIndex, normalize } from '@/shared/utils/math'
+
+  const projects: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-project]'))
+  const projectLinks: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-project-link]'))
+
+  const opacityAdjustExponential = 4
+  const opacityAdjustCoefficient = 2
+
+  const projectLinkActiveClass = 'active'
+    
+  window.addEventListener('scroll', () => {
+    if (!projects.length || !projectLinks.length || projects.length !== projectLinks.length) return
+
+    const opacityRatios = projects.map(project => {
+      const projectTop = project.getBoundingClientRect().top
+      const positionRatio = normalize(1 - Math.abs(projectTop) / window.innerHeight)
+      const opacityRatio = (positionRatio ** opacityAdjustExponential) * opacityAdjustCoefficient
+      return normalize(opacityRatio)
+    })
+
+    projects.forEach((project, index) => {
+      project.style.opacity = String(opacityRatios[index])
+    })
+    
+    const maxOpacityIndex = findMaxIndex(opacityRatios)
+
+    projectLinks.forEach(link => link.classList.remove(projectLinkActiveClass))
+    projectLinks[maxOpacityIndex].classList.add(projectLinkActiveClass)
+  })
+</script>
+
+<style is:global>
+  .projects {
+    width: 100%;
+  }
+
+  .projects__container {
+    display: flex;
+  }
+  .projects__slider {
+    flex: 0 0 100%;
+  }
+  .projects__nav {
+    --size: 10px;
+
+    flex: 0 0 var(--size);
+  }
+  .projects__nav-links {
+    width: 100%;
+    position: sticky;
+    min-height: 100dvh;
+    top: 0;
+    transform: translateX(50px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  .projects__nav-link {
+    flex: 0 0 var(--size);
+    width: var(--size);
+    height: var(--size);
+    border-radius: var(--size);
+    background-color: var(--base-700);
+    transition: 0.3s;
+  }
+  .projects__nav-link.active {
+    background-color: var(--base-500);
+  }
+
+  .project {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+  }
+  .project__content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 80px 0px;
+  }
+  .project__image {
+    flex: 0 0 40%;
+    width: 100%;
+    
+    min-height: 200px;
+    background-color: var(--base-800);
+  }
+  .project__text {
+    width: 100%;
+    flex: 0 0 50%;
+  }
+  .project__title {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.07em;
+    color: var(--base-200);
+  }
+  .project__info {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+
+    font-size: 20px;
+    letter-spacing: -0.07em;
+    color: var(--base-400);
+    line-height: 1.2;
+  }
+  .project__separation {
+    color: var(--base-500);
+  }
+  .project__description {
+    margin-top: 30px;
+    width: 100%;
+
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--base-400);
+    text-align: justify;
+  }
+</style>

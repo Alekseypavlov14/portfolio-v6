@@ -1,0 +1,94 @@
+---
+import Container from '@/components/Container.astro'
+import Icon from '@/components/Icon.astro'
+
+---
+<main id="home" class="hero">
+  <img class="hero__image" src="/images/hero-desktop.png" />
+
+  <div class="hero__header">
+    <Container class="hero__header-container">
+      <nav class="hero__nav">
+        <a href="#home" class="hero__nav-link">Home</a>
+        <a href="#works" class="hero__nav-link">Works</a>
+        <a href="#about" class="hero__nav-link">About</a>
+      </nav>
+  
+      <div class="hero__social">
+        <a class="hero__social-link" href="#">
+          <Icon name='linkedin' />
+        </a>
+        <a class="hero__social-link" href="#">
+          <Icon name='whatsapp' />
+        </a>
+        <a class="hero__social-link" href="#">
+          <Icon name='telegram' />
+        </a>
+        <a class="hero__social-link" href="#">
+          <Icon name='mail' />
+        </a>
+      </div>
+    </Container>
+  </div>
+</main>
+
+<style is:global>
+  .hero {
+    width: 100%;
+    position: relative;
+  }
+  .hero__image {
+    display: block;
+    width: 100%;
+  }
+
+  .hero__header {
+    width: 100%;
+    padding-block: 30px;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .hero__header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hero__nav {
+    display: flex;
+    gap: 40px;
+  }
+  .hero__nav-link {
+    color: var(--base-800);
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.3s;
+
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+  @media (hover: hover) {
+    .hero__nav-link:hover {
+      border-color: var(--base-800);
+    }
+  }
+  .hero__social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero__social-link {
+    color: var(--base-900);
+    transition: 0.3s;
+
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+  @media (hover: hover) {
+    .hero__social-link:hover {
+      border-color: var(--base-900);
+    }
+  }
+</style>

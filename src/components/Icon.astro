@@ -1,0 +1,44 @@
+---
+type Size = 's' | 'm' | 'l'
+
+const mapSizeToDimension: Record<Size, number> = {
+  s: 16,
+  m: 24,
+  l: 32,
+}
+
+interface Props {
+  name: string
+  class?: string
+  size?: Size
+}
+
+const { 
+  name,
+  class: className, 
+  size = 'm'
+} = Astro.props
+
+const dimension = mapSizeToDimension[size]
+
+const styles = {
+  '--size': `${dimension}px`
+}
+
+---
+<svg
+  class:list={[ "icon", className ]}
+  viewBox={`0 0 ${mapSizeToDimension[size]} ${mapSizeToDimension[size]}`}
+  style={styles}
+>
+  <use href={`icons.svg#${name}`} />
+</svg>
+
+<style scoped>
+  .icon {
+    display: block;
+    width: var(--size);
+    height: var(--size);
+    flex: 0 0 var(--size);
+  }
+</style>
