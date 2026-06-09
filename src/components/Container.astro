@@ -9,8 +9,8 @@ const { class: className } = Astro.props
 <style scoped>
   .container {
     width: 100%;
-    max-width: 1240px;
-    padding: 0px 15px;
+    max-width: var(--container-width);
+    padding: 0px var(--container-padding);
     margin: 0px auto;
   }
 </style>

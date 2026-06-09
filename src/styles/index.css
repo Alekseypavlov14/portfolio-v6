@@ -17,6 +17,7 @@ body {
   font-weight: 400;
 
   background-color: var(--base-900);
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
 }
 

@@ -1,11 +1,17 @@
 ---
 import Layout from '@/components/Layout.astro'
+
+import Header from '@/widgets/shared/Header.astro'
+
 import HomeHero from '@/widgets/home/HomeHero.astro'
 import HomeProjects from '@/widgets/home/HomeProjects.astro'
+import HomeAbout from '@/widgets/home/HomeAbout.astro'
 
 ---
 
 <Layout>
+	<Header />
 	<HomeHero />
 	<HomeProjects />
+	<HomeAbout />
 </Layout>

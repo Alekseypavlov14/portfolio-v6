@@ -1,0 +1,66 @@
+---
+import Container from '@/components/Container.astro'
+import Icon from '@/components/Icon.astro'
+
+---
+
+<header class="header">
+  <Container class="header__container">
+    <nav class="nav">
+      <a href="#" class="nav__link">HOME</a>
+      <a href="#" class="nav__link">WORKS</a>
+      <a href="#" class="nav__link">ABOUT</a>
+    </nav>
+
+    <div class="social">
+      <a href="#" class="social__link">
+        <Icon name="linkedin"></Icon>
+      </a>
+      <a href="#" class="social__link">
+        <Icon name="whatsapp"></Icon>
+      </a>
+      <a href="#" class="social__link">
+        <Icon name="telegram"></Icon>
+      </a>
+      <a href="#" class="social__link">
+        <Icon name="mail"></Icon>
+      </a>
+    </div>
+  </Container>
+</header>
+
+<style is:global>
+  .header {
+    width: 100%;
+    padding: 30px 0px;
+
+    position: absolute;
+    z-index: var(--z-index-header);
+    top: 0;
+  }
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .nav__link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--base-100);
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+</style>
