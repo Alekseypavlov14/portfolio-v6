@@ -1,8 +1,8 @@
 ---
-const { class: className } = Astro.props
+const { class: className, ...props } = Astro.props
 
 ---
-<div class:list={[ "container", className ]}>
+<div class:list={[ "container", className ]} {...props}>
   <slot />
 </div>
 

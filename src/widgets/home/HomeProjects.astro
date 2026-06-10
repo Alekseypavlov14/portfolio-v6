@@ -1,45 +1,49 @@
 ---
 import Container from '@/components/Container.astro'
 
+import { projects } from '@/data/projects'
+
 ---
 <section id="works" class="projects">
   <Container class="projects__container">
     <div class="projects__slider">
-      {new Array(10).fill(0).map(() => (
-        <div data-project class="project">
-          <div class="project__content">
-            <div class="project__image">
-            </div>
-      
-            <div class="project__text">
-              <h3 class="project__title">Data Xata - Cloud computing</h3>
-      
-              <div class="project__info">
-                <span class="project__date">20 April 2026 </span>
-                <span class="project__separation">|</span>
-                <span class="project__technologies">React, TypeScript, Next JS</span>
+      <div class="projects__slides">
+        {projects.map((project) => (
+          <div id={project.slug} data-project class="project">
+            <div class="project__content">
+              <div class="project__image">
               </div>
-      
-              <p class="project__description">
-                A modern, responsive portfolio website showcasing creative and technical 
-                work with a clean, minimal design. It highlights projects, skills, 
-                and experience through interactive sections and smooth navigation. 
-                Built for performance and accessibility, it provides a seamless user 
-                experience across devices while reflecting a strong personal brand and 
-                professional identity.
-              </p>
+        
+              <div class="project__text">
+                <h3 class="project__title">{project.title}</h3>
+        
+                <div class="project__info">
+                  <span class="project__date">{project.date}</span>
+                  <span class="project__separation">|</span>
+                  <span class="project__technologies">{project.technologies}</span>
+                </div>
+        
+                <p class="project__description">
+                  {project.description}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
-    <div class="projects__nav">
-      <div class="projects__nav-links">
-        {new Array(10).fill(0).map(() => (
-          <a data-project-link class="projects__nav-link"></a>
         ))}
       </div>
-      <div class="projects__nav-terminator"></div>
+  
+      <div class="projects__nav">
+        <div class="projects__nav-links">
+          {projects.map((project) => (
+            <a 
+              href={`#${project.slug}`} 
+              class="projects__nav-link"
+              data-project-link 
+            />
+          ))}
+        </div>
+        <div class="projects__nav-terminator" />
+      </div>
     </div>
   </Container>
 </section>
@@ -54,14 +58,24 @@ import Container from '@/components/Container.astro'
   const opacityAdjustCoefficient = 2
 
   const projectLinkActiveClass = 'active'
+
+  updateSlider()
     
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', (e) => {
+    updateSlider()
+  })
+
+  function updateSlider() {
     if (!projects.length || !projectLinks.length || projects.length !== projectLinks.length) return
 
-    const opacityRatios = projects.map(project => {
-      const projectTop = project.getBoundingClientRect().top
-      const positionRatio = normalize(1 - Math.abs(projectTop) / window.innerHeight)
-      const opacityRatio = (positionRatio ** opacityAdjustExponential) * opacityAdjustCoefficient
+    const positionRatios = projects.map(project => {
+      const projectTop = Math.abs(project.getBoundingClientRect().top)
+      const positionRatio = normalize(1 - projectTop / window.innerHeight)
+      return positionRatio
+    })
+    
+    const opacityRatios = positionRatios.map(position => {
+      const opacityRatio = (position ** opacityAdjustExponential) * opacityAdjustCoefficient
       return normalize(opacityRatio)
     })
 
@@ -73,31 +87,35 @@ import Container from '@/components/Container.astro'
 
     projectLinks.forEach(link => link.classList.remove(projectLinkActiveClass))
     projectLinks[maxOpacityIndex].classList.add(projectLinkActiveClass)
-  })
+  }
 </script>
 
 <style is:global>
   .projects {
     width: 100%;
+
+    --card-gap: 80px;
+    --nav-gap: 80px;
+    --nav-size: 10px;
   }
 
-  .projects__container {
-    display: flex;
-  }
   .projects__slider {
-    flex: 0 0 100%;
+    display: flex;
+    gap: var(--nav-gap);
+  }
+  .projects__slides {
+    width: 100%;
+    flex: 1 1 auto;
+    padding-left: calc(var(--nav-size) + var(--nav-gap));
   }
   .projects__nav {
-    --size: 10px;
-
-    flex: 0 0 var(--size);
+    flex: 0 0 var(--nav-size);
   }
   .projects__nav-links {
     width: 100%;
     position: sticky;
     min-height: 100dvh;
     top: 0;
-    transform: translateX(50px);
 
     display: flex;
     flex-direction: column;
@@ -105,27 +123,35 @@ import Container from '@/components/Container.astro'
     gap: 20px;
   }
   .projects__nav-link {
-    flex: 0 0 var(--size);
-    width: var(--size);
-    height: var(--size);
-    border-radius: var(--size);
+    flex: 0 0 var(--nav-size);
+    width: var(--nav-size);
+    height: var(--nav-size);
+    border-radius: var(--nav-size);
     background-color: var(--base-700);
     transition: 0.3s;
   }
   .projects__nav-link.active {
     background-color: var(--base-500);
   }
+  .projects__nav-terminator {
+    position: sticky;
+    top: 0;
+  }
 
   .project {
     min-height: 100dvh;
+
     display: flex;
     align-items: center;
+  
+    transform-origin: center;
   }
   .project__content {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     padding: 80px 0px;
+    gap: var(--card-gap);
   }
   .project__image {
     flex: 0 0 40%;
@@ -136,7 +162,7 @@ import Container from '@/components/Container.astro'
   }
   .project__text {
     width: 100%;
-    flex: 0 0 50%;
+    flex: 1 1 auto;
   }
   .project__title {
     font-size: 50px;

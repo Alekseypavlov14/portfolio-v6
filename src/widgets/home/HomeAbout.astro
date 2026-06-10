@@ -1,0 +1,160 @@
+---
+import Container from '@/components/Container.astro'
+
+---
+<section id="about" class="about">
+  <Container class="about__container">
+    <div class="about__section">
+      <div data-about-image class="about__image">
+        <img src="images/about-1.png" alt="" srcset="">
+      </div>
+
+      <div class="about__content">
+        <h3 class="about__title">I’m a passionate developer</h3>
+
+        <p class="about__text">
+          My journey in software development began in secondary school, where I 
+          developed a strong interest in programming and computer science. During 
+          high school, I explored technologies such as React, Redux, Zustand, 
+          TypeScript, Angular, Next.js, Node.js, NestJS, RxJS, CSS, SCSS, Gulp, 
+          and Webpack, building projects and expanding my skills.
+        </p>
+
+        <p class="about__text">
+          By the 10th grade, I started working as a freelance developer, gaining 
+          hands-on experience through real-world projects and direct client 
+          collaboration. This taught me how to understand business requirements, 
+          communicate with clients, and deliver practical solutions.
+        </p>
+        
+        <p class="about__text">
+          I am passionate about technology, algorithms, and continuous learning, 
+          always seeking new tools and approaches to improve my work.
+        </p>
+      </div>
+    </div>
+
+    <div class="about__section">
+      <div class="about__content">
+        <h3 class="about__title">
+          I like giving&nbsp;presentations 
+          at&nbsp;public&nbsp;events and&nbsp;conferences
+        </h3>
+
+        <p class="about__text">
+          I have experience giving presentations at public events and conferences 
+          on topics related to software development, artificial intelligence, and 
+          programming. I enjoy sharing knowledge with others and explaining 
+          technical concepts in a clear and accessible way.
+        </p>
+
+        <p class="about__text">
+          These presentations helped me improve my communication and public 
+          speaking skills, as well as my ability to structure complex ideas 
+          and present them to different audiences. I value the opportunity 
+          to contribute to the tech community and engage with other 
+          developers and enthusiasts.
+        </p>
+      </div>
+
+      <div data-about-image class="about__image">
+        <img src="images/about-2.png" alt="" srcset="">
+      </div>
+    </div>
+
+    <div class="about__section">
+      <div data-about-image class="about__image">
+        <img src="images/about-3.png" alt="" srcset="">
+      </div>
+
+      <div class="about__content">
+        <h3 class="about__title">I enjoy hackathons and&nbsp;competitions</h3>
+
+        <p class="about__text">
+          I am highly motivated by participation in hackathons and programming 
+          competitions, where I enjoy solving real-world problems under time 
+          constraints and collaborating with other developers. These 
+          experiences help me strengthen my problem-solving skills, 
+          think creatively under pressure, and continuously improve 
+          as a developer.
+        </p>
+
+        <p class="about__text">
+          During university, I also participated in programming competitions, 
+          where I achieved top places multiple times. In addition, during high 
+          school I was awarded in mathematical olympiads at the city level, 
+          which further developed my analytical thinking and ability to 
+          approach complex problems systematically. These achievements 
+          reflect my strong interest in mathematics, algorithms, and 
+          logical reasoning, which I actively apply in software development.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { clamp } from '@/shared/utils/math'
+
+  const aboutImages: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-about-image]'))
+  const maxDeviation = 0.15
+
+  updateAboutImages()
+
+  window.addEventListener('scroll', updateAboutImages)
+
+  function updateAboutImages() {
+    aboutImages.forEach(image => {
+      const { top } = image.getBoundingClientRect()
+      const deviationRatio = clamp(-1, top / window.innerHeight, 1)
+
+      const deviation = deviationRatio * maxDeviation
+      image.style.transform = `translateY(${deviation * 100}%)`
+    })
+  }
+  
+</script>
+
+<style is:global>
+  .about__section {
+    width: 100%;
+    padding: 80px 0px;
+
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+  .about__content {
+    flex: 0 1 auto;
+  }
+  .about__title {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.07em;
+    color: var(--base-200);
+  }
+  .about__text {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--base-400);
+    text-wrap: balance;
+  }
+  .about__image {
+    width: 100%;
+    max-width: 50%;
+    flex: 1 0 100%;
+
+    display: flex;
+    justify-content: center;
+
+    overflow: hidden;
+  }
+  .about__image img {
+    display: block;
+    max-height: 80vh;
+  }
+</style>

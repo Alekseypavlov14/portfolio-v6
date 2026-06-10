@@ -1,0 +1,40 @@
+---
+const { 
+  class: className,
+  ...props
+} = Astro.props
+
+---
+<a class:list={[ "link", className ]} {...props}>
+  <slot />
+
+  <div class="link__decor"></div>
+</a>
+
+<style scoped>
+  .link {
+    display: inline-block;
+    position: relative;
+    width: fit-content;
+  }
+
+  .link__decor {
+    display: block;
+    position: absolute;
+
+    top: 100%;
+    left: 0%;
+
+    margin-top: 4px;
+    border: 1px solid currentColor;
+
+    width: 0%;
+    opacity: 0;
+
+    transition: 0.3s;
+  }
+  .link:hover .link__decor {
+    width: 100%;
+    opacity: 1;
+  }
+</style>

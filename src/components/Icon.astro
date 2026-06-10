@@ -16,7 +16,8 @@ interface Props {
 const { 
   name,
   class: className, 
-  size = 'm'
+  size = 'm',
+  ...props
 } = Astro.props
 
 const dimension = mapSizeToDimension[size]
@@ -30,6 +31,7 @@ const styles = {
   class:list={[ "icon", className ]}
   viewBox={`0 0 ${mapSizeToDimension[size]} ${mapSizeToDimension[size]}`}
   style={styles}
+  {...props}
 >
   <use href={`icons.svg#${name}`} />
 </svg>
