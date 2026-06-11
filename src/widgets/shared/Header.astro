@@ -27,6 +27,11 @@ import Link from '@/components/Link.astro'
         <Icon name="mail"></Icon>
       </Link>
     </div>
+
+    <div class="burger">
+      <div class="burger__line"></div>
+      <div class="burger__line"></div>
+    </div>
   </Container>
 </header>
 
@@ -64,9 +69,33 @@ import Link from '@/components/Link.astro'
     gap: 10px;
   }
 
+  .burger {
+    --size: 40px;
+    --line: 24px;
+
+    height: var(--size);
+    width: var(--size);
+    flex: 0 0 var(--size);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    display: none;
+  }
+  .burger__line {
+    width: var(--line);
+    border: 1px solid var(--base-400);
+  }
+
   @media (max-width: 500px) {
     .header {
       padding-block: 15px;
+    }
+    .header__container {
+      justify-content: flex-end;
     }
 
     .header__nav {
@@ -74,6 +103,10 @@ import Link from '@/components/Link.astro'
     }
     .header__social {
       display: none;
+    }
+
+    .burger {
+      display: flex;
     }
   }
 </style>
