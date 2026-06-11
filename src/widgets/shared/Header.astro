@@ -7,13 +7,13 @@ import Link from '@/components/Link.astro'
 
 <header class="header">
   <Container class="header__container">
-    <nav class="nav">
-      <Link href="#home" class="nav__link">HOME</Link>
-      <Link href="#works" class="nav__link">WORKS</Link>
-      <Link href="#about" class="nav__link">ABOUT</Link>
+    <nav class="header__nav">
+      <Link href="#home" class="header__nav-link">HOME</Link>
+      <Link href="#works" class="header__nav-link">WORKS</Link>
+      <Link href="#about" class="header__nav-link">ABOUT</Link>
     </nav>
 
-    <div class="social">
+    <div class="header__social">
       <Link href="#" class="social__link">
         <Icon name="linkedin"></Icon>
       </Link>
@@ -45,12 +45,12 @@ import Link from '@/components/Link.astro'
     justify-content: space-between;
   }
 
-  .nav {
+  .header__nav {
     display: flex;
     align-items: center;
     gap: 40px;
   }
-  .nav__link {
+  .header__nav-link {
     font-size: 20px;
     font-weight: 500;
     line-height: 1;
@@ -58,9 +58,22 @@ import Link from '@/components/Link.astro'
     text-transform: uppercase;
   }
 
-  .social {
+  .header__social {
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+
+  @media (max-width: 500px) {
+    .header {
+      padding-block: 15px;
+    }
+
+    .header__nav {
+      display: none;
+    }
+    .header__social {
+      display: none;
+    }
   }
 </style>

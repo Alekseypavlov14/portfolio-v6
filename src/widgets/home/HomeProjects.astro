@@ -195,4 +195,45 @@ import { projects } from '@/data/projects'
     color: var(--base-400);
     text-align: justify;
   }
+
+  @media (max-width: 600px) {
+    .projects {
+      --nav-gap: 20px;
+      --card-gap: 20px;
+    }
+    .projects__slides {
+      padding-left: 0px;
+    }
+
+    .project {
+      min-height: 0px;
+    }
+    .project__content {
+      padding: 40px 0px;
+      flex-direction: column;
+    }
+    .project__image {}
+    .project__text {}
+    .project__title {
+      font-size: 24px;
+    }
+    .project__info {
+      margin-top: 5px;
+      gap: 10px;
+    }
+    .project__date {
+      font-size: 12px;
+    }
+    .project__separation {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+    .project__technologies {
+      font-size: 12px;
+    }
+    .project__description {
+      margin-top: 15px;
+      font-size: 12px;
+    }
+  }
 </style>

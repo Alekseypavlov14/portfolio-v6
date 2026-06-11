@@ -4,11 +4,11 @@ import Container from '@/components/Container.astro'
 ---
 
 <main id="home" class="hero">
-  <div class="hero__image">
-    <img src="/images/hero-desktop.png">
-  </div>
-
   <Container class="hero__container">
+    <div class="hero__image">
+      <img src="/images/hero-desktop.png">
+    </div>
+
     <div class="hero__content">
       <div class="hero__top">
         <h2 class="hero__pretitle">Hi, I am Alex,</h2>
@@ -95,5 +95,34 @@ import Container from '@/components/Container.astro'
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.03em;
+  }
+
+  @media (max-width: 500px) {
+    .hero {
+      padding-top: 70px;
+      height: auto;
+    }
+
+    .hero__image {
+      position: relative;
+      aspect-ratio: 1;
+      height: auto;
+      width: 100%;
+    }
+    
+    .hero__content {
+      width: 100%;
+      height: auto;
+    }
+    .hero__pretitle {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+    .hero__title {
+      font-size: 36px;
+    }
+    .hero__decor {
+      margin-top: 15px;
+    }
   }
 </style>
