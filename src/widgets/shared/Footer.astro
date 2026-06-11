@@ -1,0 +1,144 @@
+---
+import Container from '@/components/Container.astro'
+import Icon from '@/components/Icon.astro'
+import Link from '@/components/Link.astro'
+
+
+---
+
+<footer class="footer">
+  <Container class="footer__container">
+    <hr class="footer__separation"> 
+    
+    <Container size='m' class="footer__content">
+      <div class="footer__top">
+        <h2 class="footer__title">Stay in contact</h2>
+
+        <div class="footer__columns">
+          <div class="footer__column">
+            <h3 class="footer__column-title">Navigation</h3>
+            <div class="footer__column-links">
+              <Link href="#" class="footer__column-link">Home</Link>
+              <Link href="#" class="footer__column-link">Work</Link>
+              <Link href="#" class="footer__column-link">About</Link>
+            </div>
+          </div>
+
+          <div class="footer__column">
+            <h3 class="footer__column-title">Socials</h3>
+            <div class="footer__column-links">
+              <Link href="#" class="footer__column-link">LinkedIn</Link>
+              <Link href="#" class="footer__column-link">WhatsApp</Link>
+              <Link href="#" class="footer__column-link">Telegram</Link>
+              <Link href="#" class="footer__column-link">Google</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="social">
+          <Link href="#" class="social__link">
+            <Icon name="linkedin" size='l'></Icon>
+          </Link>
+          <Link href="#" class="social__link">
+            <Icon name="whatsapp" size='l'></Icon>
+          </Link>
+          <Link href="#" class="social__link">
+            <Icon name="telegram" size='l'></Icon>
+          </Link>
+          <Link href="#" class="social__link">
+            <Icon name="mail" size='l'></Icon>
+          </Link>
+        </div>
+
+        <div class="footer__copyright">
+          &copy; Oleksii Pavlov
+        </div>
+      </div>
+    </Container>
+  </Container>
+</footer>
+
+<style is:global>
+  .footer {
+    padding-top: 100px;
+  }
+
+  .footer__separation {
+    border: none;
+    border-bottom: 1px solid var(--base-500);
+  }
+  .footer__content {
+    height: 600px;
+
+    padding-top: 50px;
+    padding-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__top {
+    flex: 1 1 auto;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .footer__title {
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+  .footer__columns {
+    display: flex;
+    gap: 100px;
+  }
+  .footer__column {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer__column-title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .footer__column-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  .footer__column-link {
+    display: block;
+    width: 100%;
+    
+    font-size: 20px;
+    line-height: 1;
+    text-align: right;
+    color: var(--base-400);
+  }
+
+  .footer__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer__copyright {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+</style>

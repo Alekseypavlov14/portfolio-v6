@@ -1,16 +1,38 @@
 ---
-const { class: className, ...props } = Astro.props
+type Size = 'm' | 'l'
+
+const mapSizeToClass: Record<Size, string> = {
+  m: "m",
+  l: "l",
+}
+
+interface Props {
+  size?: Size
+  class?: string
+} 
+
+const { 
+  class: className, 
+  size = 'l',
+} = Astro.props
 
 ---
-<div class:list={[ "container", className ]} {...props}>
+<div class:list={[ "container", className, mapSizeToClass[size] ]}>
   <slot />
 </div>
 
 <style scoped>
   .container {
     width: 100%;
-    max-width: var(--container-width);
-    padding: 0px var(--container-padding);
-    margin: 0px auto;
+    padding-inline: var(--container-padding);
+    margin-inline: auto;
+  }
+
+  .container.m {
+    max-width: var(--container-width-medium);
+  }
+
+  .container.l {
+    max-width: var(--container-width-large);
   }
 </style>

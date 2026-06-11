@@ -54,7 +54,7 @@ import Container from '@/components/Container.astro'
   }
   .hero__content {
     height: 100%;
-    width: calc(100% - var(--image-width) + var(--container-margin) + var(--container-padding));
+    width: calc(100% - var(--image-width) + var(--container-margin-large) + var(--container-padding));
 
     display: flex;
     flex-direction: column;
@@ -73,7 +73,6 @@ import Container from '@/components/Container.astro'
     font-size: 32px;
     line-height: 1;
     letter-spacing: -0.03em;
-    color: var(--base-100);
   }
   .hero__title {
     font-family: 'Barlow Condensed', 'Inter', sans-serif;
@@ -81,7 +80,6 @@ import Container from '@/components/Container.astro'
     font-size: 64px;
     letter-spacing: -0.03em;
     line-height: 1;
-    color: var(--base-100);
   }
   .hero__decor {
     margin-top: 20px;
