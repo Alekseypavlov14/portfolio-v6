@@ -25,7 +25,8 @@
 
   --container-padding: 15px;
   
-  --z-index-header: 10;
+  --z-index-header: 20;
+  --z-index-sidebar: 10;
   --z-index-hero: 5;
 }
 

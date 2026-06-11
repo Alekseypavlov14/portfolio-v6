@@ -28,12 +28,31 @@ import Link from '@/components/Link.astro'
       </Link>
     </div>
 
-    <div class="burger">
+    <div id="burger" class="burger">
       <div class="burger__line"></div>
       <div class="burger__line"></div>
     </div>
   </Container>
+
+  <aside id="sidebar" class="sidebar">
+    <Container class="sidebar__container">
+
+    </Container>
+  </aside>
 </header>
+
+<script>
+  const sidebar = document.getElementById('sidebar')!
+  const burger = document.getElementById('burger')!
+
+  const sidebarOpenedClass = 'opened'
+  const burgerOpenedClass = 'opened'
+
+  burger.addEventListener('click', () => {
+    sidebar.classList.toggle(sidebarOpenedClass)
+    burger.classList.toggle(burgerOpenedClass)
+  })
+</script>
 
 <style is:global>
   .header {
@@ -72,10 +91,14 @@ import Link from '@/components/Link.astro'
   .burger {
     --size: 40px;
     --line: 24px;
+    --gap: 8px;
 
     height: var(--size);
     width: var(--size);
     flex: 0 0 var(--size);
+
+    position: relative;
+    z-index: var(--z-index-header);
 
     display: flex;
     flex-direction: column;
@@ -87,11 +110,37 @@ import Link from '@/components/Link.astro'
   }
   .burger__line {
     width: var(--line);
-    border: 1px solid var(--base-400);
+    border-bottom: 1px solid var(--base-400);
+    transition: 0.3s;
+  }
+  .burger__line:last-child {
+    width: calc(var(--line) / 2);
+  }
+  .burger.opened .burger__line:last-child {
+    width: var(--line);
+  }
+
+  .sidebar {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+    background-color: var(--base-900);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-index-sidebar);
+    
+    transition: 0.7s;
+  }
+  .sidebar:not(.opened) {
+    transform: translateY(-110%);
   }
 
   @media (max-width: 500px) {
     .header {
+      position: relative;
       padding-block: 15px;
     }
     .header__container {
@@ -107,6 +156,9 @@ import Link from '@/components/Link.astro'
 
     .burger {
       display: flex;
+    }
+    .sidebar {
+      display: block;
     }
   }
 </style>
