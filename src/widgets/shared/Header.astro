@@ -43,6 +43,8 @@ import Social from './Social.astro'
   const sidebar = document.getElementById('sidebar')!
   const burger = document.getElementById('burger')!
 
+  const links: Array<HTMLElement> = Array.from(document.querySelectorAll('.sidebar__nav-link'))
+
   const sidebarOpenedClass = 'opened'
   const burgerOpenedClass = 'opened'
   const bodyFixedClass = 'fixed'
@@ -51,6 +53,14 @@ import Social from './Social.astro'
     document.body.classList.toggle(bodyFixedClass)
     sidebar.classList.toggle(sidebarOpenedClass)
     burger.classList.toggle(burgerOpenedClass)
+  })
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove(bodyFixedClass)
+      sidebar.classList.remove(sidebarOpenedClass)
+      burger.classList.remove(burgerOpenedClass)
+    })
   })
 </script>
 
