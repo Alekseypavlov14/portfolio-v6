@@ -11,8 +11,8 @@ import { projects } from '@/data/projects'
         {projects.map((project) => (
           <div id={project.slug} data-project class="project">
             <div class="project__content">
-              <div class="project__image">
-              </div>
+              <a href={project.link} class="project__image" target="_blank">
+              </a>
         
               <div class="project__text">
                 <h3 class="project__title">{project.title}</h3>
@@ -139,24 +139,23 @@ import { projects } from '@/data/projects'
 
   .project {
     min-height: 100dvh;
+    width: 100%;
 
     display: flex;
     align-items: center;
-  
     transform-origin: center;
   }
   .project__content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    width: 100%;
     padding: 80px 0px;
+
+    display: flex;
+    justify-content: space-between;
     gap: var(--card-gap);
   }
   .project__image {
     flex: 0 0 40%;
-    width: 100%;
-    
-    min-height: 200px;
+    width: 100%;    
     background-color: var(--base-800);
   }
   .project__text {
