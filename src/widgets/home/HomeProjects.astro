@@ -61,9 +61,8 @@ import { projects } from '@/data/projects'
 
   updateSlider()
     
-  window.addEventListener('scroll', (e) => {
-    updateSlider()
-  })
+  window.addEventListener('scroll', updateSlider)
+  window.addEventListener('resize', updateSlider)
 
   function updateSlider() {
     if (!projects.length || !projectLinks.length || projects.length !== projectLinks.length) return
@@ -234,7 +233,9 @@ import { projects } from '@/data/projects'
     }
     .project__description {
       margin-top: 15px;
-      font-size: 12px;
+      font-size: 14px;
+      text-align: left;
+      text-wrap: balance;
     }
   }
 </style>

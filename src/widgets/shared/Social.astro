@@ -1,0 +1,35 @@
+---
+import Icon, { type IconSize } from '@/components/Icon.astro'
+import Link from '@/components/Link.astro'
+
+interface Props {
+  class?: string
+  size?: IconSize
+}
+
+const { size, class: className } = Astro.props
+
+---
+
+<div class:list={[ "social", className ]}>
+  <Link href="#" class="social__link">
+    <Icon name="linkedin" size={size}></Icon>
+  </Link>
+  <Link href="#" class="social__link">
+    <Icon name="whatsapp" size={size}></Icon>
+  </Link>
+  <Link href="#" class="social__link">
+    <Icon name="telegram" size={size}></Icon>
+  </Link>
+  <Link href="#" class="social__link">
+    <Icon name="mail" size={size}></Icon>
+  </Link>
+</div>
+
+<style>
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+</style>

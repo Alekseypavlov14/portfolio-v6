@@ -1,7 +1,7 @@
 ---
-type Size = 's' | 'm' | 'l'
+export type IconSize = 's' | 'm' | 'l'
 
-const mapSizeToDimension: Record<Size, number> = {
+const mapSizeToDimension: Record<IconSize, number> = {
   s: 16,
   m: 24,
   l: 32,
@@ -10,7 +10,7 @@ const mapSizeToDimension: Record<Size, number> = {
 interface Props {
   name: string
   class?: string
-  size?: Size
+  size?: IconSize
 }
 
 const { 

@@ -1,7 +1,7 @@
 ---
 import Container from '@/components/Container.astro'
-import Icon from '@/components/Icon.astro'
 import Link from '@/components/Link.astro'
+import Social from './Social.astro'
 
 ---
 
@@ -13,20 +13,7 @@ import Link from '@/components/Link.astro'
       <Link href="#about" class="header__nav-link">ABOUT</Link>
     </nav>
 
-    <div class="header__social">
-      <Link href="#" class="social__link">
-        <Icon name="linkedin"></Icon>
-      </Link>
-      <Link href="#" class="social__link">
-        <Icon name="whatsapp"></Icon>
-      </Link>
-      <Link href="#" class="social__link">
-        <Icon name="telegram"></Icon>
-      </Link>
-      <Link href="#" class="social__link">
-        <Icon name="mail"></Icon>
-      </Link>
-    </div>
+    <Social class="header__social" />
 
     <div id="burger" class="burger">
       <div class="burger__line"></div>
@@ -36,7 +23,18 @@ import Link from '@/components/Link.astro'
 
   <aside id="sidebar" class="sidebar">
     <Container class="sidebar__container">
+      <div class="sidebar__top">
+        <nav class="sidebar__nav">
+          <a href="#home" class="sidebar__nav-link">Home</a>
+          <a href="#works" class="sidebar__nav-link">Works</a>
+          <a href="#about" class="sidebar__nav-link">About</a>
+        </nav>
+      </div>
 
+      <div class="sidebar__bottom">
+        <hr class="sidebar__separation">
+        <Social class="sidebar__social" />
+      </div>
     </Container>
   </aside>
 </header>
@@ -47,14 +45,20 @@ import Link from '@/components/Link.astro'
 
   const sidebarOpenedClass = 'opened'
   const burgerOpenedClass = 'opened'
+  const bodyFixedClass = 'fixed'
 
   burger.addEventListener('click', () => {
+    document.body.classList.toggle(bodyFixedClass)
     sidebar.classList.toggle(sidebarOpenedClass)
     burger.classList.toggle(burgerOpenedClass)
   })
 </script>
 
 <style is:global>
+  body.fixed {
+    overflow: hidden;
+  }
+
   .header {
     width: 100%;
     padding: 30px 0px;
@@ -116,6 +120,9 @@ import Link from '@/components/Link.astro'
   .burger__line:last-child {
     width: calc(var(--line) / 2);
   }
+  .burger.opened .burger__line {
+    border-color: var(--base-100);
+  }
   .burger.opened .burger__line:last-child {
     width: var(--line);
   }
@@ -127,15 +134,56 @@ import Link from '@/components/Link.astro'
     height: 100%;
     background-color: var(--base-900);
 
+    padding-top: 70px;
+    padding-bottom: 20px;
+
     position: fixed;
     top: 0;
     left: 0;
     z-index: var(--z-index-sidebar);
+
+    display: flex;
+    flex-direction: column;
     
     transition: 0.7s;
   }
   .sidebar:not(.opened) {
     transform: translateY(-110%);
+  }
+
+  .sidebar__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar__top {
+    flex: 1 1 auto;
+    padding-top: 70px;
+  }
+  .sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .sidebar__nav-link {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .sidebar__separation {
+    border: none;
+    border-top: 1px solid var(--base-500);
+    width: 80%;
+  }
+  .sidebar__bottom {
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
   }
 
   @media (max-width: 500px) {
@@ -151,14 +199,14 @@ import Link from '@/components/Link.astro'
       display: none;
     }
     .header__social {
-      display: none;
+      display: none !important;
     }
 
     .burger {
       display: flex;
     }
     .sidebar {
-      display: block;
+      display: flex;
     }
   }
 </style>

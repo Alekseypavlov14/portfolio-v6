@@ -1,8 +1,7 @@
 ---
 import Container from '@/components/Container.astro'
-import Icon from '@/components/Icon.astro'
 import Link from '@/components/Link.astro'
-
+import Social from './Social.astro'
 
 ---
 
@@ -37,20 +36,7 @@ import Link from '@/components/Link.astro'
       </div>
 
       <div class="footer__bottom">
-        <div class="footer__social">
-          <Link href="#" class="footer__social-link">
-            <Icon name="linkedin" size='l'></Icon>
-          </Link>
-          <Link href="#" class="footer__social-link">
-            <Icon name="whatsapp" size='l'></Icon>
-          </Link>
-          <Link href="#" class="footer__social-link">
-            <Icon name="telegram" size='l'></Icon>
-          </Link>
-          <Link href="#" class="footer__social-link">
-            <Icon name="mail" size='l'></Icon>
-          </Link>
-        </div>
+        <Social size='l' class="footer__social" />
 
         <div class="footer__copyright">
           &copy; Oleksii Pavlov
