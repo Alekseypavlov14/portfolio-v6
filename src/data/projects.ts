@@ -14,7 +14,7 @@ export const projects: Project[] = [
     slug: 'data-xata',
     link: 'https://data-xata.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/data-xata.jpg',
     title: 'Data Xata - Cloud computing',
     date: '10 May 2026',
     technologies: 'React, TypeScript, Next JS',
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     slug: 'challenge-group',
     link: 'https://challenge-group.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/challenge-group.jpg',
     title: 'Challenge Group - Insurance',
     date: '9 April 2026',
     technologies: 'HTML, CSS, JavaScript',
@@ -45,10 +45,10 @@ export const projects: Project[] = [
     `,
   },
   {
-    slug: 'casa-demo',
+    slug: 'casa',
     link: 'https://casa-demo.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/casa.jpg',
     title: 'Casa - Premium food',
     date: '24 January 2026',
     technologies: 'React, TypeScript, Next JS',
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     slug: 'aipie',
     link: 'https://aipie.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/aipie.jpg',
     title: 'AiPie - AI Management',
     date: '12 July 2025',
     technologies: 'HTML, CSS, JavaScript',
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     slug: 'migration-human-resources',
     link: 'https://migration-human-resources.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/migration-human-resources.jpg',
     title: 'Migration Human Resources',
     date: '10 October 2025',
     technologies: 'HTML, CSS, JavaScript',
@@ -95,26 +95,10 @@ export const projects: Project[] = [
     `,
   },
   {
-    slug: 'bzvd',
-    link: 'https://bzvd.netlify.app',
-
-    image: '',
-    title: 'BZVD - Marketing conference',
-    date: '22 September 2025',
-    technologies: 'HTML, CSS, JavaScript',
-    description: `
-      A website for a conference focused on management and marketing discussions, presenting key 
-      event information such as speakers, agenda, and main topics. It provides participants with 
-      clear access to the schedule, event details, and essential organizational information. 
-      The platform is structured to communicate professionalism and ensure an intuitive and 
-      informative experience for attendees.
-    `,
-  },
-  {
     slug: 'power-broker',
     link: 'https://power-broker.netlify.app',
 
-    image: '',
+    image: '/images/portfolio/power-broker.jpg',
     title: 'Power Broker - Trading',
     date: '17 March 2024',
     technologies: 'HTML, CSS, JavaScript',
