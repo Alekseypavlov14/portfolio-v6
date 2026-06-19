@@ -1,4 +1,7 @@
 ---
+import { isNumber, isString } from '@/shared/utils/types'
+import { first } from '@/shared/utils/logic'
+
 export type IconSize = 's' | 'm' | 'l'
 
 const mapSizeToDimension: Record<IconSize, number> = {
@@ -7,20 +10,30 @@ const mapSizeToDimension: Record<IconSize, number> = {
   l: 32,
 }
 
+const DEFAULT_SIZE = 'm'
+
 interface Props {
   name: string
   class?: string
-  size?: IconSize
+  size?: IconSize | number
+  viewBox?: number
 }
 
 const { 
   name,
   class: className, 
-  size = 'm',
+  size,
+  viewBox,
   ...props
 } = Astro.props
 
-const dimension = mapSizeToDimension[size]
+const dimension = first([
+  [ isNumber(size), () => size ],
+  [ isString(size), () => mapSizeToDimension[size as IconSize] ],
+  [ isNumber(viewBox), () => viewBox ]
+], mapSizeToDimension[DEFAULT_SIZE])
+
+const viewBoxSize = isNumber(viewBox) ? viewBox : dimension
 
 const styles = {
   '--size': `${dimension}px`
@@ -29,7 +42,7 @@ const styles = {
 ---
 <svg
   class:list={[ "icon", className ]}
-  viewBox="0 0 24 24"
+  viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
   style={styles}
   {...props}
 >

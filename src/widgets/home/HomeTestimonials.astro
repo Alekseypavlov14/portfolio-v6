@@ -1,0 +1,248 @@
+---
+import Container from '@/components/Container.astro'
+import Icon from '@/components/Icon.astro'
+
+import { testimonials } from '@/data/testimonials'
+
+// for smooth infinite loop
+const doubledTestimonialsArray = [ ...testimonials, ...testimonials ]
+
+function isDuplicate(index: number) {
+  return index >= testimonials.length
+}
+
+---
+<section class="testimonials">
+  <Container>
+    <div class="testimonials-slider">
+      <div data-testimonials-slider class="testimonials-slider__slides">
+        {doubledTestimonialsArray.map((testimonial, index) => (
+          <div 
+            data-testimonials-slider-slide 
+            class:list={[ "testimonials-slider__slide", isDuplicate(index) && "duplicated" ]}
+          >
+            <div class="testimonial-card">
+              <div class="testimonial-card__header">
+                <Icon name="quote" class="testimonial-card__quote" viewBox={48} />
+              </div>
+  
+              <div class="testimonial-card__body" set:html={testimonial.text} />
+              
+              <div class="testimonial-card__footer">
+                <div class="testimonial-card__avatar"></div>
+                <div class="testimonial-card__info">
+                  <div class="testimonial-card__headline">
+                    <div class="testimonial-card__name">{testimonial.author}</div>
+                    <div class="testimonial-card__rate">
+                      <Icon name='star-filled' class="testimonial-card__star" viewBox={20} />
+                      <Icon name='star-filled' class="testimonial-card__star" viewBox={20} />
+                      <Icon name='star-filled' class="testimonial-card__star" viewBox={20} />
+                      <Icon name='star-filled' class="testimonial-card__star" viewBox={20} />
+                      <Icon name='star-filled' class="testimonial-card__star" viewBox={20} />
+                    </div>
+                  </div>
+
+                  <div class="testimonial-card__details">
+                    {testimonial.details}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { sum } from '@/shared/utils/math'
+
+  const sliders = Array.from<HTMLElement>(document.querySelectorAll('[data-testimonials-slider]'))
+  const SECONDS_PER_SCREEN = 7
+
+  sliders.forEach(slider => {
+    const slides = Array.from<HTMLElement>(slider.querySelectorAll('[data-testimonials-slider-slide]'))
+
+    updateAnimationDuration()
+    window.addEventListener('resize', updateAnimationDuration)
+    
+    function updateAnimationDuration() {
+      if (!slider || !slides.length) return
+    
+      const slidesWidth = sum(slides.map(slide => slide.offsetWidth))
+      const animationDuration = slidesWidth / window.innerWidth * SECONDS_PER_SCREEN
+    
+      slider.style.setProperty('--deviation', `-${slidesWidth / 2}px`)
+      slider.style.setProperty('--duration', `${animationDuration}s`)
+    }
+  })
+</script>
+
+<style is:global>
+  .testimonials {
+    padding: 80px 0px;
+  }
+  @media (max-width: 500px) {
+    .testimonials {
+      padding: 40px 0px;
+    }
+  }
+
+  .testimonials-slider {
+    --overflow: calc(var(--container-margin-large) + var(--container-padding));
+
+    margin-inline: calc(0px - var(--overflow));
+    padding-inline: var(--overflow);
+
+    overflow-x: hidden;
+  }
+  .testimonials-slider::-webkit-scrollbar {
+    display: none;
+  }
+  .testimonials-slider__slides {
+    --deviation: 0px;
+    --duration: 0s;
+
+    display: flex;
+
+    animation-name: infinite-loop;
+    animation-duration: var(--duration);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  .testimonials-slider__slide {
+    flex: 0 0 50%;
+    display: flex;
+    padding-inline: 10px;
+  }
+  @keyframes infinite-loop {
+    0% {
+      transform: translateX(calc(0px - var(--overflow)));
+    }
+    100% {
+      transform: translateX(calc(var(--deviation) - var(--overflow)));
+    }
+  }
+
+  @media (max-width: 500px) {
+    .testimonials-slider {
+      overflow-x: auto;
+      display: flex;
+    }
+    .testimonials-slider__slides {
+      display: contents;
+      animation: none;
+    }
+    .testimonials-slider__slide {
+      flex: 0 0 100%;
+      padding-inline: 5px;
+    }
+    .testimonials-slider__slide.duplicated {
+      display: none;
+    }
+  }
+
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+
+    border-top: 1px solid var(--base-700);
+    border-bottom: 1px solid var(--base-700);
+  }
+  .testimonial-card__header {
+    display: flex;
+    gap: 15px;
+  }
+  .testimonial-card__body {
+    flex: 1 1 auto;
+    width: 100%;
+
+    padding-top: 30px;
+    padding-bottom: 80px;
+
+    font-size: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--base-400);
+  }
+  .testimonial-card__body b {
+    font-weight: 600;
+    color: var(--base-100);
+  }
+  .testimonial-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .testimonial-card__avatar {
+    --size: 60px;
+
+    width: var(--size);
+    height: var(--size);
+    flex: 0 0 var(--size);
+    border-radius: 10px;
+
+    background-color: var(--base-800);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .testimonial-card__headline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .testimonial-card__name {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+    color: var(--base-100);
+  }
+  .testimonial-card__rate {
+    display: flex;
+    align-items: center;
+  }
+  .testimonial-card__star {
+    --size: 24px;
+  }
+  .testimonial-card__details {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.05em;
+    color: var(--base-300);
+  }
+  @media (max-width: 500px) {
+    .testimonial-card {
+      padding: 10px 0px 20px 0px;
+    }
+    .testimonial-card__quote {
+      --size: 36px !important;
+    }
+    .testimonial-card__body {
+      padding-top: 10px;
+      padding-bottom: 30px;
+
+      font-size: 14px;
+    }
+    .testimonial-card__footer {
+      gap: 10px;
+    }
+    .testimonial-card__avatar {
+      --size: 40px;
+    }
+    .testimonial-card__name {
+      font-size: 18px;
+    }
+    .testimonial-card__star {
+      --size: 16px !important;
+    }
+    .testimonial-card__details {
+      font-size: 10px;
+    }
+  }
+</style>

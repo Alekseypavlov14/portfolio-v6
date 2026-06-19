@@ -14,3 +14,7 @@ export function clamp(min: number, value: number, max: number) {
 export function normalize(value: number) {
   return clamp(0, value, 1)
 }
+
+export function sum(values: number[]) {
+  return values.reduce((current, total) => total + current, 0)
+}

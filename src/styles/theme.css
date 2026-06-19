@@ -23,7 +23,7 @@
   --container-margin-large: max(0px, calc((100vw - var(--container-width-large)) / 2));
   --container-margin-medium: max(0px, calc((100vw - var(--container-width-medium)) / 2));
 
-  --container-padding: 15px;
+  --container-padding: 20px;
   
   --z-index-header: 20;
   --z-index-sidebar: 10;
