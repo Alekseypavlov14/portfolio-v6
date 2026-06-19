@@ -127,14 +127,18 @@ function isDuplicate(index: number) {
 
   @media (max-width: 500px) {
     .testimonials-slider {
-      overflow-x: auto;
       display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
     .testimonials-slider__slides {
       display: contents;
       animation: none;
     }
     .testimonials-slider__slide {
+      scroll-snap-align: start;
+      scroll-margin-left: var(--container-padding);
+      
       flex: 0 0 100%;
       padding-inline: 5px;
     }
