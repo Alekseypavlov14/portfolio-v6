@@ -59,7 +59,7 @@ function isDuplicate(index: number) {
   import { sum } from '@/shared/utils/math'
 
   const sliders = Array.from<HTMLElement>(document.querySelectorAll('[data-testimonials-slider]'))
-  const SECONDS_PER_SCREEN = 7
+  const SECONDS_PER_SCREEN = 13
 
   sliders.forEach(slider => {
     const slides = Array.from<HTMLElement>(slider.querySelectorAll('[data-testimonials-slider-slide]'))
@@ -163,9 +163,10 @@ function isDuplicate(index: number) {
     padding-bottom: 80px;
 
     font-size: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
     letter-spacing: -0.03em;
     color: var(--base-400);
+    text-wrap: balance;
   }
   .testimonial-card__body b {
     font-weight: 600;
@@ -226,7 +227,6 @@ function isDuplicate(index: number) {
     .testimonial-card__body {
       padding-top: 10px;
       padding-bottom: 30px;
-
       font-size: 14px;
     }
     .testimonial-card__footer {
@@ -242,7 +242,7 @@ function isDuplicate(index: number) {
       --size: 16px !important;
     }
     .testimonial-card__details {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 </style>
