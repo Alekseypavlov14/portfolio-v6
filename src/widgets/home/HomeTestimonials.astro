@@ -129,12 +129,17 @@ function isDuplicate(index: number) {
     .testimonials-slider {
       display: flex;
       overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
     .testimonials-slider__slides {
       display: contents;
       animation: none;
     }
     .testimonials-slider__slide {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      scroll-margin-left: var(--container-padding);
+      
       flex: 0 0 100%;
       padding-inline: 5px;
     }
