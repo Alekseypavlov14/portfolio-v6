@@ -14,7 +14,7 @@ export const projects: Project[] = [
     slug: 'data-xata',
     link: 'https://data-xata.netlify.app',
 
-    image: '/images/portfolio/data-xata.jpg',
+    image: '/images/portfolio/data-xata.webp',
     title: 'Data Xata - Cloud computing',
     date: '10 May 2026',
     technologies: 'React, TypeScript, Next JS',
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     slug: 'challenge-group',
     link: 'https://challenge-group.netlify.app',
 
-    image: '/images/portfolio/challenge-group.jpg',
+    image: '/images/portfolio/challenge-group.webp',
     title: 'Challenge Group - Insurance',
     date: '9 April 2026',
     technologies: 'HTML, CSS, JavaScript',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     slug: 'casa',
     link: 'https://casa-demo.netlify.app',
 
-    image: '/images/portfolio/casa.jpg',
+    image: '/images/portfolio/casa.webp',
     title: 'Casa - Premium food',
     date: '24 January 2026',
     technologies: 'React, TypeScript, Next JS',
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     slug: 'aipie',
     link: 'https://aipie.netlify.app',
 
-    image: '/images/portfolio/aipie.jpg',
+    image: '/images/portfolio/aipie.webp',
     title: 'AiPie - AI Management',
     date: '12 July 2025',
     technologies: 'HTML, CSS, JavaScript',
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     slug: 'migration-human-resources',
     link: 'https://migration-human-resources.netlify.app',
 
-    image: '/images/portfolio/migration-human-resources.jpg',
+    image: '/images/portfolio/migration-human-resources.webp',
     title: 'Migration Human Resources',
     date: '10 October 2025',
     technologies: 'HTML, CSS, JavaScript',
@@ -98,7 +98,7 @@ export const projects: Project[] = [
     slug: 'power-broker',
     link: 'https://power-broker.netlify.app',
 
-    image: '/images/portfolio/power-broker.jpg',
+    image: '/images/portfolio/power-broker.webp',
     title: 'Power Broker - Trading',
     date: '17 March 2024',
     technologies: 'HTML, CSS, JavaScript',
