@@ -1,7 +1,8 @@
 ---
-type Size = 'm' | 'l'
+type Size = 's' | 'm' | 'l'
 
 const mapSizeToClass: Record<Size, string> = {
+  s: "s",
   m: "m",
   l: "l",
 }
@@ -26,6 +27,10 @@ const {
     width: 100%;
     padding-inline: var(--container-padding);
     margin-inline: auto;
+  }
+
+  .container.s {
+    max-width: var(--container-width-small);
   }
 
   .container.m {

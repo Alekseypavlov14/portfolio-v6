@@ -1,0 +1,112 @@
+---
+import Container from '@/components/Container.astro'
+
+import type { Project } from '@/data/projects'
+
+export interface Props {
+  project: Project
+}
+
+const project = Astro.props.project
+
+---
+<section class="project-presentation-preview">
+  <Container class="project-presentation-preview__container" size='s'>
+    <a href={project.link} class="project-presentation-preview__image" target="_blank">
+      <img src={project.image} alt="" />
+    </a>
+
+    <a href={project.link} class="project-presentation-preview__title" target="_blank">{project.title}</a>
+
+    <div class="project-presentation-preview__info">
+      <div class="project-presentation-preview__date">{project.date}</div>
+      <div class="project-presentation-preview__separation">|</div>
+      <div class="project-presentation-preview__technologies">{project.technologies}</div>
+    </div>
+    
+    <p class="project-presentation-preview__description">{project.description}</p>
+  </Container>
+</section>
+
+<style is:global>
+  .project-presentation-preview {
+    padding-top: 10px;
+    padding-bottom: 100px;
+  }
+  /* .project-presentation-preview__container {} */
+  .project-presentation-preview__image {
+    display: block;
+    width: 100%;
+  }
+  .project-presentation-preview__image img {
+    display: block;
+    max-width: 100%;
+  }
+  .project-presentation-preview__title {
+    display: block;
+    margin-top: 80px;
+
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.07em;
+    color: var(--base-200);
+  }
+  .project-presentation-preview__info {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+
+    font-size: 20px;
+    letter-spacing: -0.07em;
+    color: var(--base-400);
+    line-height: 1.2;
+  }
+  /* .project-presentation-preview__date {} */
+  .project-presentation-preview__separation {
+    color: var(--base-500);
+  }
+  /* .project-presentation-preview__technologies {} */
+  .project-presentation-preview__description {
+    margin-top: 30px;
+    width: 100%;
+
+    font-size: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--base-400);
+  }
+
+  @media (max-width: 600px) {
+    .project-presentation-preview {
+      padding-top: 0px;
+      padding-bottom: 50px;
+    }
+    .project-presentation-preview__title {
+      margin-top: 30px;
+      font-size: 24px;
+    }
+    .project-presentation-preview__info {
+      margin-top: 10px;
+      gap: 10px;
+    }
+    .project-presentation-preview__date {
+      font-size: 12px;
+      letter-spacing: -0.03em;
+    }
+    .project-presentation-preview__separation {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+    .project-presentation-preview__technologies {
+      font-size: 12px;
+      letter-spacing: -0.03em;
+    }
+    .project-presentation-preview__description {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: left;
+      text-wrap: balance;
+    }
+  }
+</style>

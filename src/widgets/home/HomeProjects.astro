@@ -1,22 +1,27 @@
 ---
 import Container from '@/components/Container.astro'
 
-import { projects } from '@/data/projects'
+import { getPresentationLink, hasPresentation } from '@/features/presentations'
+import { projects, type Project } from '@/data/projects'
+
+export function getProjectLink(project: Project): string {
+  return hasPresentation(project.slug) ? getPresentationLink(project.slug) : project.link
+}
 
 ---
 <section id="works" class="projects">
   <Container class="projects__container">
-    <div class="projects__slider">
+    <div data-project-slider class="projects__slider">
       <div class="projects__slides">
         {projects.map((project) => (
           <div id={project.slug} data-project class="project">
             <div class="project__content">
-              <a href={project.link} class="project__image" target="_blank">
+              <a href={getProjectLink(project)} class="project__image" target="_blank">
                 {project.image ? <img src={project.image} /> : ''}
               </a>
         
               <div class="project__text">
-                <a href={project.link} class="project__title" target="_blank">{project.title}</a>
+                <a href={getProjectLink(project)} class="project__title" target="_blank">{project.title}</a>
         
                 <div class="project__info">
                   <span class="project__date">{project.date}</span>
@@ -52,42 +57,44 @@ import { projects } from '@/data/projects'
 <script>
   import { findMaxIndex, normalize } from '@/shared/utils/math'
 
-  const projects: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-project]'))
-  const projectLinks: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-project-link]'))
-
+  const sliders: Array<HTMLElement> = Array.from(document.querySelectorAll('[data-project-slider]'))
+  const projectLinkActiveClass = 'active'
   const opacityAdjustExponential = 4
   const opacityAdjustCoefficient = 2
 
-  const projectLinkActiveClass = 'active'
-
-  updateSlider()
+  sliders.forEach(slider => {
+    const projects: Array<HTMLElement> = Array.from(slider.querySelectorAll('[data-project]'))
+    const projectLinks: Array<HTMLElement> = Array.from(slider.querySelectorAll('[data-project-link]'))
     
-  window.addEventListener('scroll', updateSlider)
-  window.addEventListener('resize', updateSlider)
-
-  function updateSlider() {
-    if (!projects.length || !projectLinks.length || projects.length !== projectLinks.length) return
-
-    const positionRatios = projects.map(project => {
-      const projectTop = Math.abs(project.getBoundingClientRect().top)
-      const positionRatio = normalize(1 - projectTop / window.innerHeight)
-      return positionRatio
-    })
-    
-    const opacityRatios = positionRatios.map(position => {
-      const opacityRatio = (position ** opacityAdjustExponential) * opacityAdjustCoefficient
-      return normalize(opacityRatio)
-    })
-
-    projects.forEach((project, index) => {
-      project.style.opacity = String(opacityRatios[index])
-    })
-    
-    const maxOpacityIndex = findMaxIndex(opacityRatios)
-
-    projectLinks.forEach(link => link.classList.remove(projectLinkActiveClass))
-    projectLinks[maxOpacityIndex].classList.add(projectLinkActiveClass)
-  }
+    updateSlider()
+      
+    window.addEventListener('scroll', updateSlider)
+    window.addEventListener('resize', updateSlider)
+  
+    function updateSlider() {
+      if (!projects.length || !projectLinks.length || projects.length !== projectLinks.length) return
+  
+      const positionRatios = projects.map(project => {
+        const projectTop = Math.abs(project.getBoundingClientRect().top)
+        const positionRatio = normalize(1 - projectTop / window.innerHeight)
+        return positionRatio
+      })
+      
+      const opacityRatios = positionRatios.map(position => {
+        const opacityRatio = (position ** opacityAdjustExponential) * opacityAdjustCoefficient
+        return normalize(opacityRatio)
+      })
+  
+      projects.forEach((project, index) => {
+        project.style.opacity = String(opacityRatios[index])
+      })
+      
+      const maxOpacityIndex = findMaxIndex(opacityRatios)
+  
+      projectLinks.forEach(link => link.classList.remove(projectLinkActiveClass))
+      projectLinks[maxOpacityIndex].classList.add(projectLinkActiveClass)
+    }
+  })
 </script>
 
 <style is:global>

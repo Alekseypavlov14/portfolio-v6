@@ -1,0 +1,101 @@
+---
+import Container from '@/components/Container.astro'
+
+import type { ProjectPresentation } from '@/data/presentations'
+import type { Project } from '@/data/projects'
+
+export interface Props {
+  project: Project
+  presentation: ProjectPresentation
+}
+
+const project = Astro.props.project
+const presentation = Astro.props.presentation
+
+function getPageLink(link: string) {
+  return `${project.link}${link}`
+}
+
+---
+<section class="project-presentation-pages">
+  <Container class="project-presentation-pages__container" size='s'>
+    {presentation.pages.map(page => (
+      <div class="project-presentation-page">
+        <a 
+          href={getPageLink(page.link)} 
+          class="project-presentation-page__title" 
+          target="_blank"
+        >
+          {page.title}
+        </a>
+        
+        <div class="project-presentation-page__description">
+          {page.description}
+        </div>
+
+        <a 
+          href={getPageLink(page.link)} 
+          class="project-presentation-page__image" 
+          target="_blank"
+        >
+          <img src={page.image} alt="" />
+        </a>
+      </div>
+    ))}
+  </Container>
+</section>
+
+<style is:global>
+  .project-presentation-pages {
+    display: block;
+  }
+  .project-presentation-pages__container {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+  .project-presentation-page {
+    display: block;
+  }
+  .project-presentation-page__title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.07em;
+    color: var(--base-200);
+  }
+  .project-presentation-page__description {
+    margin-top: 10px;
+    width: 100%;
+
+    font-size: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--base-400);
+  }
+  .project-presentation-page__image {
+    max-width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .project-presentation-page__image img {
+    display: block;
+    max-width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    .project-presentation-pages__container {
+      gap: 30px;
+    }
+    .project-presentation-page__title {
+      font-size: 20px;
+    }
+    .project-presentation-page__description {
+      font-size: 14px;
+    }
+    .project-presentation-page__image {
+      margin-top: 10px;
+    }
+  }
+</style>

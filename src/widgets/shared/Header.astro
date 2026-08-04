@@ -3,14 +3,20 @@ import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
 import Social from './Social.astro'
 
+export interface Props {
+  positionStatic?: boolean
+}
+
+const positionStatic = Astro.props.positionStatic
+
 ---
 
-<header class="header">
+<header class:list={["header", positionStatic && 'static']}>
   <Container class="header__container">
     <nav class="header__nav">
-      <Link href="#home" class="header__nav-link">HOME</Link>
-      <Link href="#works" class="header__nav-link">WORKS</Link>
-      <Link href="#about" class="header__nav-link">ABOUT</Link>
+      <Link href="/#home" class="header__nav-link">HOME</Link>
+      <Link href="/#works" class="header__nav-link">WORKS</Link>
+      <Link href="/#about" class="header__nav-link">ABOUT</Link>
     </nav>
 
     <Social class="header__social" />
@@ -25,9 +31,9 @@ import Social from './Social.astro'
     <Container class="sidebar__container">
       <div class="sidebar__top">
         <nav class="sidebar__nav">
-          <a href="#home" class="sidebar__nav-link">Home</a>
-          <a href="#works" class="sidebar__nav-link">Works</a>
-          <a href="#about" class="sidebar__nav-link">About</a>
+          <a href="/#home" class="sidebar__nav-link">Home</a>
+          <a href="/#works" class="sidebar__nav-link">Works</a>
+          <a href="/#about" class="sidebar__nav-link">About</a>
         </nav>
       </div>
 
@@ -76,6 +82,9 @@ import Social from './Social.astro'
     position: absolute;
     z-index: var(--z-index-header);
     top: 0;
+  }
+  .header.static {
+    position: relative;
   }
   .header__container {
     display: flex;

@@ -1,0 +1,44 @@
+---
+import Container from '@/components/Container.astro'
+import Link from '@/components/Link.astro'
+
+---
+
+<section class="not-found">
+  <Container class="not-found__container">
+    <h1 class="not-found__title">404. Not found</h1>
+    <Link href="/" class="not-found__link">Let's go home</Link>
+  </Container>
+</section>
+
+<style is:global>
+  .not-found {
+    min-height: 50svh;
+    display: flex;
+  }
+  .not-found__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .not-found__title {
+    font-size: 80px;
+    font-weight: 500;
+    letter-spacing: -0.07em;
+  }
+  .not-found__link {
+    font-size: 20px;
+    letter-spacing: -0.03em;
+  }
+
+  @media (max-width: 600px) {
+    .not-found__title {
+      font-size: 32px;
+    }
+    .not-found__link {
+      font-size: 14px;
+    }
+  }
+</style>
