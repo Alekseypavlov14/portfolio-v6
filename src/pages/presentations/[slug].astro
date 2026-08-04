@@ -29,7 +29,7 @@ const project: Project = Astro.props.project as Project
 const presentation: ProjectPresentation = Astro.props.presentation as ProjectPresentation
 
 ---
-<Layout>
+<Layout title={`${project.title} | Oleksii Pavlov`}>
 	<Header positionStatic />
 
 	<ProjectPresentationPreview project={project} />

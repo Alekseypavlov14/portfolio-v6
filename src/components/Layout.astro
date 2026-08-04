@@ -2,6 +2,12 @@
 import '@/styles/index.css'
 import '@/styles/theme.css'
 
+interface Props {
+	title?: string
+}
+
+const title = Astro.props.title ?? 'Oleksii Pavlov | Frontend Developer'
+
 ---
 <html lang="en">
 	<head>
@@ -10,7 +16,7 @@ import '@/styles/theme.css'
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Oleksii Pavlov | Frontend Developer</title>
+		<title>{title}</title>
 	</head>
 
 	<body>
