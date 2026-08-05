@@ -16,7 +16,7 @@ interface Props {
   name: string
   class?: string
   size?: IconSize | number
-  viewBox?: number
+  viewBox?: IconSize | number
 }
 
 const { 
@@ -33,7 +33,10 @@ const dimension = first([
   [ isNumber(viewBox), () => viewBox ]
 ], mapSizeToDimension[DEFAULT_SIZE])
 
-const viewBoxSize = isNumber(viewBox) ? viewBox : dimension
+const viewBoxSize = first([
+  [ isNumber(viewBox), () => viewBox ],
+  [ isString(viewBox), () => mapSizeToDimension[viewBox as IconSize] ],
+], dimension)
 
 const styles = {
   '--size': `${dimension}px`

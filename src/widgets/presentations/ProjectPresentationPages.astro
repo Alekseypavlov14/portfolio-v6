@@ -1,5 +1,6 @@
 ---
 import Container from '@/components/Container.astro'
+import Icon from '@/components/Icon.astro'
 
 import type { ProjectPresentation } from '@/data/presentations'
 import type { Project } from '@/data/projects'
@@ -26,7 +27,8 @@ function getPageLink(link: string) {
           class="project-presentation-page__title" 
           target="_blank"
         >
-          {page.title}
+          <span>{page.title}</span>
+          <Icon class="project-presentation-page__title-icon" name='external' size="l" viewBox="m" />
         </a>
         
         <div class="project-presentation-page__description">
@@ -58,11 +60,18 @@ function getPageLink(link: string) {
     display: block;
   }
   .project-presentation-page__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
     font-size: 40px;
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.07em;
     color: var(--base-200);
+  }
+  .project-presentation-page__title-icon {
+    --size: 40px !important;
   }
   .project-presentation-page__description {
     margin-top: 10px;
@@ -90,6 +99,10 @@ function getPageLink(link: string) {
     }
     .project-presentation-page__title {
       font-size: 20px;
+      gap: 5px;
+    }
+    .project-presentation-page__title-icon {
+      --size: 20px !important;
     }
     .project-presentation-page__description {
       font-size: 14px;
