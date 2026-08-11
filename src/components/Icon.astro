@@ -27,16 +27,15 @@ const {
   ...props
 } = Astro.props
 
-const dimension = first([
-  [ isNumber(size), () => size ],
-  [ isString(size), () => mapSizeToDimension[size as IconSize] ],
-  [ isNumber(viewBox), () => viewBox ]
-], mapSizeToDimension[DEFAULT_SIZE])
-
 const viewBoxSize = first([
   [ isNumber(viewBox), () => viewBox ],
   [ isString(viewBox), () => mapSizeToDimension[viewBox as IconSize] ],
-], dimension)
+], mapSizeToDimension[DEFAULT_SIZE])
+
+const dimension = first([
+  [ isNumber(size), () => size ],
+  [ isString(size), () => mapSizeToDimension[size as IconSize] ]
+], viewBoxSize)
 
 const styles = {
   '--size': `${dimension}px`
