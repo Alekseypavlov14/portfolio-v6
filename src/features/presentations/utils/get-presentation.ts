@@ -1,4 +1,4 @@
-import { projectPresentations, type ProjectPresentation } from '@/data/presentations'
+import { projectPresentations, type ProjectPresentation } from '@/app/data/presentations'
 import type { Nullable } from '@/shared/types/nullable'
 
 export function getPresentation(slug: string): Nullable<ProjectPresentation> {

@@ -2,7 +2,7 @@
 import Container from '@/components/Container.astro'
 
 import { getPresentationLink, hasPresentation } from '@/features/presentations'
-import { projects, type Project } from '@/data/projects'
+import { projects, type Project } from '@/app/data/projects'
 
 export function getProjectLink(project: Project): string {
   return hasPresentation(project.slug) ? getPresentationLink(project.slug) : project.link

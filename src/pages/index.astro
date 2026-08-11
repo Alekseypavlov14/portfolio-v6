@@ -1,5 +1,5 @@
 ---
-import Layout from '@/components/Layout.astro'
+import { PageLayout } from '@/app/layouts'
 
 import Header from '@/widgets/shared/Header.astro'
 import Footer from '@/widgets/shared/Footer.astro'
@@ -11,7 +11,7 @@ import HomeAbout from '@/widgets/home/HomeAbout.astro'
 
 ---
 
-<Layout>
+<PageLayout>
 	<Header />
 	
 	<HomeHero />
@@ -20,4 +20,4 @@ import HomeAbout from '@/widgets/home/HomeAbout.astro'
 	<HomeAbout />
 
 	<Footer />
-</Layout>
+</PageLayout>

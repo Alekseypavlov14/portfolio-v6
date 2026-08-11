@@ -1,15 +1,17 @@
 ---
-import Layout from '@/components/Layout.astro'
+import { PageLayout } from '@/app/layouts'
+
 import Header from '@/widgets/shared/Header.astro'
 import Footer from '@/widgets/shared/Footer.astro'
 
 import ProjectPresentationPreview from '@/widgets/presentations/ProjectPresentationPreview.astro'
 import ProjectPresentationPages from '@/widgets/presentations/ProjectPresentationPages.astro'
 
+import type { ProjectPresentation } from '@/app/data/presentations'
+import { projects, type Project } from '@/app/data/projects'
+
 import type { GetStaticPathsItem, GetStaticPathsResult } from 'astro'
-import type { ProjectPresentation } from '@/data/presentations'
 import { getPresentation, hasPresentation } from '@/features/presentations'
-import { projects, type Project } from '@/data/projects'
 
 export function getStaticPaths(): GetStaticPathsResult {
 	return projects
@@ -29,7 +31,7 @@ const project: Project = Astro.props.project as Project
 const presentation: ProjectPresentation = Astro.props.presentation as ProjectPresentation
 
 ---
-<Layout title={`${project.title} | Oleksii Pavlov`}>
+<PageLayout title={`${project.title} | Oleksii Pavlov`}>
 	<Header positionStatic />
 
 	<ProjectPresentationPreview project={project} />
@@ -39,4 +41,4 @@ const presentation: ProjectPresentation = Astro.props.presentation as ProjectPre
 	/>
 
 	<Footer />
-</Layout>
+</PageLayout>
